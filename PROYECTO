@@ -1,0 +1,73 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ForoHub {
+
+    public static void main(String[] args) {
+        ArrayList<Challenge> retos = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int opcion;
+
+        do {
+            System.out.println("\n=== Foro Hub - Challenge Menu ===");
+            System.out.println("1. Crear nuevo reto");
+            System.out.println("2. Listar todos los retos");
+            System.out.println("3. Buscar retos por palabra clave");
+            System.out.println("4. Salir");
+            System.out.print("Elige una opción: ");
+            opcion = sc.nextInt();
+            sc.nextLine(); // limpiar buffer
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Título del reto: ");
+                    String titulo = sc.nextLine();
+                    System.out.print("Descripción: ");
+                    String descripcion = sc.nextLine();
+                    System.out.print("Dificultad (Fácil, Media, Difícil): ");
+                    String dificultad = sc.nextLine();
+                    retos.add(new Challenge(titulo, descripcion, dificultad));
+                    System.out.println("Reto agregado correctamente!");
+                    break;
+
+                case 2:
+                    System.out.println("\n--- Retos disponibles ---");
+                    if (retos.isEmpty()) {
+                        System.out.println("No hay retos disponibles.");
+                    } else {
+                        for (Challenge c : retos) {
+                            System.out.println(c);
+                        }
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Ingresa palabra clave: ");
+                    String clave = sc.nextLine().toLowerCase();
+                    boolean encontrado = false;
+                    System.out.println("\n--- Resultados de la búsqueda ---");
+                    for (Challenge c : retos) {
+                        if (c.getTitulo().toLowerCase().contains(clave) ||
+                            c.getDescripcion().toLowerCase().contains(clave) ||
+                            c.getDificultad().toLowerCase().contains(clave)) {
+                            System.out.println(c);
+                            encontrado = true;
+                        }
+                    }
+                    if (!encontrado) {
+                        System.out.println("No se encontraron retos con esa palabra clave.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Saliendo del Foro Hub...");
+                    break;
+
+                default:
+                    System.out.println("Opción inválida.");
+            }
+        } while (opcion != 4);
+
+        sc.close();
+    }
+}
