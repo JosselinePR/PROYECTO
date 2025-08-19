@@ -1,0 +1,28 @@
+public class Challenge {
+    private String titulo;
+    private String descripcion;
+    private String dificultad;
+
+    public Challenge(String titulo, String descripcion, String dificultad) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.dificultad = dificultad;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getDificultad() {
+        return dificultad;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + dificultad + "] " + titulo + " - " + descripcion;
+    }
+}
